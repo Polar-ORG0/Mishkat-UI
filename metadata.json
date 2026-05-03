@@ -1,0 +1,6 @@
+{
+  "name": "Terminal RAG Interface",
+  "description": "A retro terminal-style chatbot interface for interacting with a RAG model.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
