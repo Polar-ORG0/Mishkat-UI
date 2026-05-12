@@ -16,7 +16,7 @@ export async function queryRAGStream(
       },
       body: JSON.stringify({
         query: userQuery,
-        ref_ids: refs_ids,
+        references: refs_ids,
         chat_id: chat_id,
         language: 'ar',
         limit: 12
