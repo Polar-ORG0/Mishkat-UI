@@ -2,6 +2,9 @@ const API_URL = 'http://localhost:8000';
 
 export async function queryRAGStream(
   userQuery: string,
+  refs_ids: string[],
+  accountId: string,
+  chat_id: string | null,
   onChunk: (chunk: string) => void
 ): Promise<void> {
   try {
@@ -9,9 +12,12 @@ export async function queryRAGStream(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accountId}`,
       },
       body: JSON.stringify({
         query: userQuery,
+        ref_ids: refs_ids,
+        chat_id: chat_id,
         language: 'ar',
         limit: 12
       }),

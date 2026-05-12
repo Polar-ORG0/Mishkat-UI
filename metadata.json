@@ -1,6 +1,6 @@
 {
-  "name": "Terminal RAG Interface",
-  "description": "A retro terminal-style chatbot interface for interacting with a RAG model.",
+  "name": "Mishkat RAG Interface",
+  "description": "An elegant chatbot interface for interacting with a RAG model of Islamic sources.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }

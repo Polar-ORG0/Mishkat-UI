@@ -1,67 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Amiri", serif;
 }
 
 body {
-  background-color: #020c09;
-  background-image: 
-    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L23 17L40 20L23 23L20 40L17 23L0 20L17 17Z' fill='%2310b981' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 50% 0%, #072318 0%, #020c09 80%);
-  color: #e2e8f0;
+  /* Elegant off-white background with a subtle golden Islamic geometric pattern */
+  background-color: #fdfdfc;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15L15 15zM0 30l15 15-15 15-15-15zM60 30l15 15-15 15-15-15zM30 60l15 15-15 15L15 75z' fill='%23d4af37' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  color: #1f2937;
   margin: 0;
   overflow: hidden;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   background-attachment: fixed;
 }
 
+/* Custom Scrollbar - elegant golden */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #10b98133;
+  background: #d4af3740;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #10b98188;
+  background: #d4af3780;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-.cursor-blink {
-  animation: blink 1s step-end infinite;
-}
-
-.glass-header {
-  background: rgba(4, 18, 14, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
+/* Markdown Styles */
 .markdown-body {
   font-family: inherit;
   color: inherit;
+  line-height: 1.6;
 }
 .markdown-body p {
   margin-bottom: 0.75rem;
 }
 .markdown-body strong {
-  color: #10b981; 
-  font-weight: 700;
+  color: #927822; /* Deep Gold */
+  font-weight: 600;
 }
 .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
-  color: #34d399; 
+  color: #796215;
   font-weight: 700;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-serif);
 }
 .markdown-body ul, .markdown-body ol {
   margin-bottom: 0.75rem;
@@ -70,16 +67,30 @@ body {
 .markdown-body ul li {
   position: relative;
   padding-left: 1.25rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 .markdown-body ul li::before {
-  content: '>';
+  content: '•';
   position: absolute;
   left: 0;
-  color: #fbbf24;
+  color: #d4af37; /* Gold */
+  font-weight: bold;
 }
 .markdown-body ol {
   list-style-type: decimal;
   padding-left: 1.5rem;
 }
+.markdown-body ol li::marker {
+  color: #d4af37;
+  font-weight: 600;
+}
+.markdown-body blockquote {
+  border-left: 4px solid #d4af37;
+  padding-left: 1rem;
+  color: #4b5563;
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 1.1em;
+}
+
 
