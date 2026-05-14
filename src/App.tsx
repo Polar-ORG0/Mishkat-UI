@@ -16,7 +16,14 @@ type Chat = {
   preview: string;
 };
 
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL
+
+const generateId = () => {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+};
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,7 +59,7 @@ export default function App() {
   const [mentionSelectedIndex, setMentionSelectedIndex] = useState<number>(0);
 
   const getAuthHeaders = () => {
-    const token = currentUser?.user_id
+    const token = currentUser?._id
     return {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -60,7 +67,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetch(`${API_URL}/api/v1/ref`)
+    console.log(API_URL)
+    fetch(`${API_URL}/api/v1/ref/`)
       .then(res => res.json())
       .then(data => data.map((ref: any) => JSON.parse(ref)))
       .then(data => {
@@ -171,7 +179,7 @@ export default function App() {
         if (loadedMessages.length > 0) {
           setMessages(loadedMessages);
         } else {
-          setMessages([{ id: crypto.randomUUID(), role: 'bot', content: "Chat loaded but no messages found." }]);
+          setMessages([{ id: generateId(), role: 'bot', content: "Chat loaded but no messages found." }]);
         }
       }
     } catch (error) {
@@ -183,7 +191,7 @@ export default function App() {
     setCurrentChatId(null);
     setMessages([
       {
-        id: crypto.randomUUID(),
+        id: generateId(),
         role: 'bot',
         content: "As-salamu alaykum. I am Mishkat. How may I assist you with Islamic knowledge today? You can type `@` at the beginning to mention specific Hadith books."
       }
@@ -282,7 +290,7 @@ export default function App() {
     setMentionQuery(null);
     if (inputRef.current) inputRef.current.style.height = 'auto';
 
-    setMessages(prev => [...prev, { id: crypto.randomUUID(), role: 'user', content: cleanedMessage }]);
+    setMessages(prev => [...prev, { id: generateId(), role: 'user', content: cleanedMessage }]);
     setIsProcessing(true);
 
     try {
@@ -303,11 +311,11 @@ export default function App() {
         }
       }
 
-      const botMsgId = crypto.randomUUID();
+      const botMsgId = generateId();
       setMessages(prev => [...prev, { id: botMsgId, role: 'bot', content: "" }]);
 
       let fullContent = "";
-      const userIdOrToken = currentUser?.user_id
+      const userIdOrToken = currentUser?._id
       
       await queryRAGStream(cleanedMessage, mentionedIds, userIdOrToken, activeChatId, (chunk) => {
         fullContent += chunk;
